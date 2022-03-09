@@ -7,24 +7,16 @@ from dataVisualization import *
 from Prediction import *
 
 if __name__=='__main__':
-	"Aqui voce mudar o path pra o data surjo kkkkk"
-	lim = DataProcessing('data.csv')
+	"Opcional passar arquivo ou não - senão passar o algoritmo baixa"
+	lim = DataProcessing("C:\\Users\\talis\\Desktop\\Projeto POO\\Projeto_Covid_POO\\data.csv")
 	dadosLimpo = lim.dataProcessing()
 	
-		
 	busca = dataAnalysis(dadosLimpo)
-	filtredData = busca.buscaAno(2019, 2021)
-	#filtredData.drop(['index'], axis=1, inplace=True)
-	#print(filtredData.dtypes)
-	filtredData = filtredData.astype({'DATA HORA': 'string'})
-	x = []
-	for i in filtredData['DATA HORA']:
-		x.append(i)
-	print(x)
+	filtredData = busca.searchYear(2021, 2022)
+	#busca.searchMonth("7",'2021')
+	print(filtredData)
+	
 	plot = dataVisualization()
-	plot.singlePlot(filtredData['DATA HORA'][::-1], filtredData['ÓBITOS'][::-1])
-	
-	
-
-	
+	#plot.singlePlot(filtredData['DATA HORA'], filtredData['CONFIRMADOS'])
+	plot.multiPlot(3,filtredData[::-1])
 	
