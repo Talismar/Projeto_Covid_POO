@@ -20,9 +20,9 @@ class dataAnalysis(Data):
 				anoInicial+=1	
 
 			"Concat"				
-			self.__searc = pd.concat(myListDataFrames, ignore_index=True)
+			self.__search = pd.concat(myListDataFrames, ignore_index=True)
 			
-			for i in self.__searc['DATA HORA']:
+			for i in self.__search['DATA HORA']:
 				if i[3:] not in dataAnalysis.myListDate:
 					dataAnalysis.myListDate.append(i[3:])
 					dataAnalysis.myList.append(self.searchMonth(i[3:5],i[6:]))
@@ -36,11 +36,11 @@ class dataAnalysis(Data):
 
 			return new_dataset
 			"Retorna a soma de anos"
-			#return self.__searc.iloc[:,arange(1,9,1)].sum()
+			#return self.__search.iloc[:,arange(1,9,1)].sum()
 		else:
-			self.__searcFi = super().get_dataset()[super().get_dataset()["DATA HORA"].str.contains(f'/{str(anoFinal)}')]
+			self.__searchFi = super().get_dataset()[super().get_dataset()["DATA HORA"].str.contains(f'/{str(anoFinal)}')]
 
-			for i in self.__searcFi['DATA HORA']:
+			for i in self.__searchFi['DATA HORA']:
 				if i[3:] not in dataAnalysis.myListDate:
 					dataAnalysis.myListDate.append(i[3:])
 					dataAnalysis.myList.append(self.searchMonth(i[3:5],i[6:]))
@@ -54,7 +54,7 @@ class dataAnalysis(Data):
 			"Retorna a soma de meses"
 			return new_dataset
 			"Retorna a soma de anos"			
-			#return self.__searcFi.iloc[:,arange(1,9,1)].sum()
+			#return self.__searchFi.iloc[:,arange(1,9,1)].sum()
 		
 	def searchMonth(self, month, year):
 		if '0' not in month and len(month) == 1:
