@@ -34,7 +34,7 @@ class dataVisualization:
 		dictCols = {}
 				
 		#Mostra na tela as opções de colunas e cria um dicionário
-		for count, value in enumerate(dataset.columns, start=1):
+		for count, value in enumerate(dataset.columns[1:], start=1):
 			print(count,'-', value)
 			dictCols[count] = value
 
@@ -47,10 +47,10 @@ class dataVisualization:
 		newCols=[]
 		for i in listCols:
 			newCols.append(dictCols[i])
-			
+		color_list=['blue', 'orange', 'green', 'red', 'purple', 'brown', 'pink', 'gray']		
 		# plot
 		fig, ax = plt.subplots()
-		for i in range(1,len(newCols)):
-			ax.plot(dataset[newCols[0]][::-1], dataset[newCols[i]][::-1], linewidth=2.0, color='blue', label="DATA")
+		for i in range(0,len(newCols)):
+			ax.plot(dataset[newCols[0]][::-1], dataset[newCols[i]][::-1], linewidth=2.0, color=color_list[i], label="DATA")
 		plt.xticks(rotation=45)
 		plt.show()
