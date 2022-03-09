@@ -8,7 +8,7 @@ from Prediction import *
 
 if __name__=='__main__':
 	"Opcional passar arquivo ou não - senão passar o algoritmo baixa"
-	lim = DataProcessing("C:\\Users\\talis\\Desktop\\Projeto POO\\Projeto_Covid_POO\\data.csv")
+	lim = DataProcessing("C:\\Users\\talis\\Desktop\\Projeto POO\\new_data.csv")
 	dadosLimpo = lim.dataProcessing()
 	
 	busca = dataAnalysis(dadosLimpo)

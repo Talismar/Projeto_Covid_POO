@@ -12,7 +12,7 @@ class DataProcessing:
 			self.__dataset = pd.read_csv(dataset)
 			
 			# Delete the last row
-			if "paudosferros.rn.gov.br" in self.__dataset.iloc[-1][1]:
+			if "paudosferros.rn.gov.br" in str(self.__dataset.iloc[-1][1]):
 				self.__dataset.drop(self.__dataset.index[-1], axis=0, inplace=True)
 
 	def dataProcessing(self):        
