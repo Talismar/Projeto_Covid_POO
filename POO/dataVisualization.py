@@ -51,6 +51,6 @@ class dataVisualization:
 		# plot
 		fig, ax = plt.subplots()
 		for i in range(0,len(newCols)):
-			ax.plot(dataset[newCols[0]][::-1], dataset[newCols[i]][::-1], linewidth=2.0, color=color_list[i], label="DATA")
+			ax.plot(dataset['DATA HORA'][::-1], dataset[newCols[i]][::-1], linewidth=2.0, color=color_list[i], label="DATA")
 		plt.xticks(rotation=45)
 		plt.show()
