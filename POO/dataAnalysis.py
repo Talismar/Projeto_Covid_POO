@@ -46,7 +46,13 @@ class dataAnalysis(Data):
 					dataAnalysis.myList.append(self.searchMonth(i[3:5],i[6:]))
 			
 			"Retorna a soma de meses"
-			return [dataAnalysis.myListDate, pd.DataFrame(dataAnalysis.myList)]
+			new_dataset = pd.DataFrame({"DATA HORA":dataAnalysis.myListDate})
+			
+			for i in pd.DataFrame(dataAnalysis.myList).columns:
+				new_dataset[i] = pd.DataFrame(dataAnalysis.myList)[i]
+			
+			"Retorna a soma de meses"
+			return new_dataset
 			"Retorna a soma de anos"			
 			#return self.__searcFi.iloc[:,arange(1,9,1)].sum()
 		

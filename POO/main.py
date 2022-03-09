@@ -12,7 +12,7 @@ if __name__=='__main__':
 	dadosLimpo = lim.dataProcessing()
 	
 	busca = dataAnalysis(dadosLimpo)
-	filtredData = busca.searchYear(2021, 2022)
+	filtredData = busca.searchYear(2021, 2021)
 	#busca.searchMonth("7",'2021')
 	print(filtredData)
 	
