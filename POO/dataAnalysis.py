@@ -56,5 +56,16 @@ class dataAnalysis(Data):
 			month = str(0) + month
 
 		searc = super().get_dataset()[super().get_dataset()["DATA HORA"].str.contains(f'/{month}/{year}')]
-
+		
+		
+		#return len(searc)
+		
 		return searc.iloc[:,arange(1,9,1)].sum()
+	
+	def fatalityRate(self,i,j):
+		
+		print(super().fatalityRate(i,j))
+
+if __name__ == "__main__":
+	data = dataAnalysis("C:\\Users\\talis\\Desktop\\Projeto POO\\Projetov3\\new_data.csv")
+	

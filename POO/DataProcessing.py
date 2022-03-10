@@ -21,8 +21,8 @@ class DataProcessing:
 		
 		#Changing data types
 		self.__covid_data = self.__covid_data.astype({'DATA HORA': np.datetime64(), 'SUSPEITOS':'int', 'CONFIRMADOS':'int', 'DESCARTADOS':'int', 'ÓBITOS':'int', 'INTERNADOS':'int', 'CURADOS':'int', 'NOTIFICADOS':'int', 'ISOLAMENTO':'int'})
-
-		return self.__covid_data
+		
+		return self.__covid_data[::-1].reset_index(drop=True)
 
 	def webScraping(self):
 		#WebScraping of data SESAEU/PAU_DOS_FERROS_COVID-19

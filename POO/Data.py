@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import pandas as pd
+import abc
 
-class Data:
+class Data(abc.ABC):
 	def __init__(self, dataset):
 		self.__dataset = dataset
 		
@@ -17,7 +18,7 @@ class Data:
 			self.__isolamento = self.__dataset['ISOLAMENTO'][::-1]
 		else:
 			"Tratar os dados aqui"
-			
+
 	def get_dataset(self):
 		return self.__dataset
 	def get_data(self):
@@ -59,3 +60,7 @@ class Data:
 		self.__notificados = notificados
 	def set_isolamento(self, isolamento):
 		self.__isolamento = isolamento
+	
+	@abc.abstractmethod
+	def fatalityRate(self,i,j):
+		return str(round((i / j) * 100,2)) + " %"
