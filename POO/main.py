@@ -20,3 +20,5 @@ if __name__=='__main__':
 	#plot.singlePlot(filtredData['DATA HORA'], filtredData['CONFIRMADOS'])
 	plot.multiPlot(3,filtredData[::-1])
 	
+	pred = Prediction()
+	pred.polynomialRegression(filtredData['SUSPEITOS'], filtredData['SUSPEITOS'])
