@@ -4,7 +4,7 @@ from DataProcessing import DataProcessing
 from Data import Data
 from dataAnalysis import dataAnalysis
 from dataVisualization import *
-from Prediction import *
+from prediction import *
 
 if __name__=='__main__':
 	"Opcional passar arquivo ou não - senão passar o algoritmo baixa"
