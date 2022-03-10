@@ -1,49 +1,37 @@
 #!/usr/bin/env python3
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 from sklearn import linear_model 
 from sklearn.preprocessing import PolynomialFeatures
 
-
-class Predict:
-	def __init__(self, y, x=None) -> None:
-		self.__y = y
-		self.__x = x
+class Prediction:
+	def polynomialRegression(self,x,y):
+		x = np.array(x).reshape(-1,1)
+		y = np.array(y).reshape(-1,1)
+		#print(len(x),len(y))
+		plt.plot(y, '-m', label='SUSPEITOS')
+		#plt.show()
 		
-		if self.__x == None:
-			self.__x = np.arange(0,len(self.__y))
-			
-	def vizualicao(self):
-		#print(self.__y)
-		print(len(self.__x),len(self.__y))
-		plt.plot(self.__y, '-m')
-		plt.show()
-		
-	def fit(self, degree):
-		self.__x = np.array(self.__x).reshape(-1,1)
-		self.__y = np.array(self.__y).reshape(-1,1)
-		self.__polyFeat = PolynomialFeatures(degree=degree)
-		x = self.__polyFeat.fit_transform(self.__x)
+		polyFeat = PolynomialFeatures(degree=10)
+		x = polyFeat.fit_transform(x)
 		
 		"TRAINING DATA"
-		self.__model = linear_model.LinearRegression()
-		self.__model.fit(x,self.__y)
-		accuracy = self.__model.score(x,self.__y)
-		
+		model = linear_model.LinearRegression()
+		model.fit(x,y)
+		accuracy = model.score(x,y)
 		print('Accuracy > ', round(accuracy*100,3), "%")
+		y0 = model.predict(x)
 		
-		print(len(self.__x),len(self.__y))
-		plt.plot(self.__y, '-m')
-		y0 = self.__model.predict(x)
-		plt.plot(y0, '--b')
+		"MAKE PLOT"
+		plt.plot(y0, '--b', label=f'Prediction accuracy: {round(accuracy*100,3)}, %')
+		plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.09), ncol=8)
 		plt.show()
 		
-	def prediction(self, num):
+		
 		print("PREDICTION")
 		up_after = 1
-		
+	
+		print(x.sum())
 		print(f'Prediction - Cases after {up_after}: ', end='')
-		print(round(int(self.__model.predict(self.__polyFeat.fit_transform([[len(self.__y)+up_after]])))))
-		
-		
+		print(round(int(model.predict(polyFeat.fit_transform([[len(x)+up_after]])))))
