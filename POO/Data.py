@@ -1,24 +1,20 @@
 #!/usr/bin/env python3
-import pandas as pd
 import abc
+import pandas as pd
 
 class Data(abc.ABC):
 	def __init__(self, dataset):
 		self.__dataset = dataset
-		
-		if len(self.__dataset) > 0:
-			self.__data = self.__dataset['DATA HORA'][::-1]
-			self.__suspeitos = self.__dataset['SUSPEITOS'][::-1]
-			self.__confirmados = self.__dataset['CONFIRMADOS'][::-1]
-			self.__descartados = self.__dataset['DESCARTADOS'][::-1]
-			self.__obitos = self.__dataset['ÓBITOS'][::-1]
-			self.__internados = self.__dataset['INTERNADOS'][::-1]
-			self.__curados = self.__dataset['CURADOS'][::-1]
-			self.__notificados = self.__dataset['NOTIFICADOS'][::-1]
-			self.__isolamento = self.__dataset['ISOLAMENTO'][::-1]
-		else:
-			"Tratar os dados aqui"
-
+		self.__data = self.__dataset['DATA HORA']
+		self.__suspeitos = self.__dataset['SUSPEITOS']
+		self.__confirmados = self.__dataset['CONFIRMADOS']
+		self.__descartados = self.__dataset['DESCARTADOS']
+		self.__obitos = self.__dataset['ÓBITOS']
+		self.__internados = self.__dataset['INTERNADOS']
+		self.__curados = self.__dataset['CURADOS']
+		self.__notificados = self.__dataset['NOTIFICADOS']
+		self.__isolamento = self.__dataset['ISOLAMENTO']
+	
 	def get_dataset(self):
 		return self.__dataset
 	def get_data(self):
@@ -62,5 +58,9 @@ class Data(abc.ABC):
 		self.__isolamento = isolamento
 	
 	@abc.abstractmethod
-	def fatalityRate(self,i,j):
-		return str(round((i / j) * 100,2)) + " %"
+	def fatalityRate(self):
+		"Retorna a taxa de fatalidade de todo o dataset"
+		return str(round((self.__obitos.sum() / self.__confirmados.sum()) * 100,2)) + " %"
+
+	def __str__(self):
+		return f'Data - {self.__data.iloc[-1]}\nSuspeitos - {self.__suspeitos.iloc[-1]}\nConfirmados - {self.__confirmados.iloc[-1]}\nDescartados - {self.__descartados.iloc[-1]}\nÓbitos - {self.__obitos.iloc[-1]}\nInternados - {self.__internados.iloc[-1]}\nCurados - {self.__curados.iloc[-1]}\nNotificados - {self.__notificados.iloc[-1]}\nIsolamento - {self.__isolamento.iloc[-1]}'

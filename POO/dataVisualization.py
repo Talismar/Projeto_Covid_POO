@@ -3,6 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class dataVisualization:
+	def __init__(self, dataset):
+		self.dataset = dataset
+
 	def singlePlot(self,col_x, col_y):
 		
 		#plt.style.use('dark_background')
@@ -29,12 +32,12 @@ class dataVisualization:
 		
 		plt.show()
 
-	def multiPlot(self, nCols, dataset):
+	def multiPlot(self, nCols):
 		listCols = []
 		dictCols = {}
 				
 		#Mostra na tela as opções de colunas e cria um dicionário
-		for count, value in enumerate(dataset.columns[1:], start=1):
+		for count, value in enumerate(self.dataset.columns[1:], start=1):
 			print(count,'-', value)
 			dictCols[count] = value
 
@@ -51,7 +54,19 @@ class dataVisualization:
 		# plot
 		fig, ax = plt.subplots()
 		for i in range(0,len(newCols)):
-			ax.plot(dataset['DATA HORA'][::-1], dataset[newCols[i]][::-1], linewidth=2.0, color=color_list[i], label=newCols[i])
+			print(newCols[i])
+			ax.plot(self.dataset['DATA HORA'], self.dataset[newCols[i]], linewidth=2.0, color=color_list[i], label=newCols[i])
+		plt.xticks(rotation=45)
+		ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.09), ncol=8)
+		plt.show()
+
+	def vizual(self):
+		color_list=['blue', 'orange', 'green', 'red', 'purple', 'brown', 'pink', 'gray']		
+		# plot
+		fig, ax = plt.subplots()
+		for i,j in enumerate(['SUSPEITOS', 'CONFIRMADOS', 'DESCARTADOS', 'ÓBITOS']):
+			
+			ax.plot(self.dataset['DATA HORA'], self.dataset[j], linewidth=2.0, color=color_list[i], label=j)
 		plt.xticks(rotation=45)
 		ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.09), ncol=8)
 		plt.show()

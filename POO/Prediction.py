@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 import matplotlib.pyplot as plt
 import numpy as np
-from DataAnalysis import dataAnalysis
 from sklearn import linear_model 
 from sklearn.preprocessing import PolynomialFeatures
 
 class Prediction:
-	def polynomialRegression(self, x, y):
+	def polynomialRegression(self, dataset, numCol, show=False):
 
-		self.__x = np.array(np.arange(0,len(x))).reshape(-1,1)
-		self.__y = np.array(y).reshape(-1,1)
-		
-		plt.plot(y, '-m', label=y.name)
+		self.__dados = dataset
+		self.__numCol = numCol
+
+		self.__x = np.array(np.arange(0,len(self.__dados['DATA HORA']))).reshape(-1,1)
+		self.__y = np.array(self.__dados.iloc[:,self.__numCol]).reshape(-1,1)
 		
 		self.__polyFeat = PolynomialFeatures(degree=10)
 		self.__x01 = self.__polyFeat.fit_transform(self.__x)
@@ -21,22 +21,37 @@ class Prediction:
 		self.__model.fit(self.__x01 ,self.__y)
 
 		accuracy = self.__model.score(self.__x01 ,self.__y)
-
+		
 		y0 = self.__model.predict(self.__x01)
 		
-		"MAKE PLOT"
-		plt.plot(y0, '--b', label=f'Prediction accuracy: {round(accuracy*100,3)}, %')
-		plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.09), ncol=8)
-		plt.show()
-
-	
-	def prediction(self, teste):
-		cont = 0
-		print(teste)
-		for i in range(0,teste):
-			num=i
+		if show:
+			"MAKE PLOT"
+			#plt.style.use('dark_background')
+			fig, ax = plt.subplots()
+			plt.plot(self.__dados['DATA HORA'], self.__dados.iloc[:,self.__numCol], '-m', label= self.__dados.iloc[:,self.__numCol].name)
+			ax.set(xlim=(0, len(self.__dados['DATA HORA'])) , xticks=np.arange(0,len(self.__dados['DATA HORA']),8))
+			plt.plot(y0, '--b', label=f'Prediction accuracy: {round(accuracy*100,3)}, %')
+			plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.09), ncol=8)
+			ax.set_xlabel('DATAS', fontsize=12)
+			ax.set_ylabel(self.__dados.iloc[:,numCol].name, fontsize=12)
 			
-			cont += round(int(self.__model.predict(self.__polyFeat.fit_transform([[len(self.__x)+num]]))))
-		print(cont)
+			plt.xticks(rotation=45)
+			plt.show()
 
+	def prediction(self, numUp):
+		predict = 0
 
+		numUp = (numUp * 4)
+		for _ in range(0,numUp):
+			predict += round(int(self.__model.predict(self.__polyFeat.fit_transform([[len(self.__x)+1]]))))
+		
+		print("Somatorio ultimos 4 mês -> ",self.__dados.iloc[:,self.__numCol].iloc[-4:].sum())
+		print("Predição -> ",predict)
+		
+		if self.__dados.iloc[:,self.__numCol].iloc[-4:].sum() > predict:
+			return "BAIXA"
+		else:
+			return "AUMENTO"
+		
+		
+	

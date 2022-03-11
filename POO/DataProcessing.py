@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 
 import pandas as pd
+from pandas.errors import EmptyDataError
 import requests
 import numpy as np
 
-class DataProcessing:
+class dataProcessing:
 	def __init__(self,dataset=None):
 		if dataset == None:
 			self.__dataset = self.webScraping()
 		else:
-			self.__dataset = pd.read_csv(dataset)
-			
-			# Delete the last row
-			if "paudosferros.rn.gov.br" in str(self.__dataset.iloc[-1][1]):
-				self.__dataset.drop(self.__dataset.index[-1], axis=0, inplace=True)
+			try:
+				"Abrindo o arquivo"
+				self.__dataset = pd.read_csv(dataset)
+				
+				# Delete the last row
+				if "paudosferros.rn.gov.br" in str(self.__dataset.iloc[-1][1]):
+					self.__dataset.drop(self.__dataset.index[-1], axis=0, inplace=True)	
+		
+			except EmptyDataError:
+				print("Seus Dados estão vazios")
 
 	def dataProcessing(self):        
 		#Replace NaN Values with Zeros
@@ -38,8 +44,4 @@ class DataProcessing:
 		if input("Deseja salva o Dataset [S = Sim|N - Não] -> ").lower() == "s": 
 			self.__df.to_csv('new_data.csv', index=False)
 			
-		return self.__df
-
-if __name__ == "__main__":
-	#data = DataProcessing("C:\\Users\\talis\\Desktop\\Projeto POO\\Projeto_Covid_POO\\data.csv")
-	data = DataProcessing()
+		return self.__dfA
