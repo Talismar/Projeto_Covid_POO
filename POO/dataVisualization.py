@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import matplotlib
+matplotlib.use("TkAgg")
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -62,11 +64,12 @@ class dataVisualization:
 
 	def vizual(self):
 		color_list=['blue', 'orange', 'green', 'red', 'purple', 'brown', 'pink', 'gray']		
-		# plot
-		fig, ax = plt.subplots()
+		
+		plt.figure(figsize=(8, 6))		
 		for i,j in enumerate(['SUSPEITOS', 'CONFIRMADOS', 'DESCARTADOS', 'ÓBITOS']):
+			plt.plot(self.dataset['DATA HORA'], self.dataset[j], linewidth=2.0, color=color_list[i], label=j)
 			
-			ax.plot(self.dataset['DATA HORA'], self.dataset[j], linewidth=2.0, color=color_list[i], label=j)
 		plt.xticks(rotation=45)
-		ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.09), ncol=8)
-		plt.show()
+		plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.09), ncol=8)
+		plt.savefig("C:\\Users\\talis\\Desktop\\Projeto POO\\Projetov3\\version04\\Projeto_Covid_POO\\POO\\plotGeral.png", dpi=200)
+		

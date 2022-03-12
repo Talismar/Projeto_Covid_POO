@@ -2,7 +2,7 @@
 
 import pandas as pd
 from pandas.errors import EmptyDataError
-import requests
+import urllib.request
 import numpy as np
 
 class dataProcessing:
@@ -32,11 +32,18 @@ class dataProcessing:
 
 	def webScraping(self):
 		#WebScraping of data SESAEU/PAU_DOS_FERROS_COVID-19
-		self.__url = 'https://paudosferros.rn.gov.br/relatorio.php?id=24&rel=#'
-		self.__html = requests.get(self.__url).content
-		self.__df_list = pd.read_html(self.__html)
-		self.__df = self.__df_list[-1]
+		user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
 
+		url = "https://paudosferros.rn.gov.br/relatorio.php?id=24&rel=#"
+		headers={'User-Agent':user_agent,} 
+
+		request=urllib.request.Request(url,None,headers) #The assembled request
+		response = urllib.request.urlopen(request)
+		data = response.read()
+		
+		self.__df_list = pd.read_html(data)
+		self.__df = self.__df_list[-1]
+		
 		# Delete the last row
 		self.__df.drop(self.__df.index[-1], axis=0, inplace=True)
 		
@@ -44,4 +51,4 @@ class dataProcessing:
 		if input("Deseja salva o Dataset [S = Sim|N - Não] -> ").lower() == "s": 
 			self.__df.to_csv('new_data.csv', index=False)
 			
-		return self.__dfA
+		return self.__df

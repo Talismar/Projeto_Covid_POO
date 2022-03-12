@@ -10,18 +10,18 @@ if platform.system() == 'Windows':
 else:
     system("clear")
 
-""" url = 'https://paudosferros.rn.gov.br/relatorio.php?id=24&rel=#'
+url = 'https://paudosferros.rn.gov.br/relatorio.php?id=24&rel=#'
 
 data = pd.read_html(url)
-
+print(data)
 "Transformando em um arquivo CSV"
-df = pd.DataFrame(data[0])
+""" df = pd.DataFrame(data[0])
 
-df.to_csv('dadosCovid.csv') """
+df.to_csv('dadosCovid.csv')
 
 data = pd.read_csv("C:\\Users\\talis\\Desktop\\Projeto POO\\dadosCovid.csv")
 data.drop(['Unnamed: 0'], axis=1, inplace=True)
-print(data.columns)
+print(data.columns) """
 
 
 

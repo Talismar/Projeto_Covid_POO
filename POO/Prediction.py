@@ -27,16 +27,17 @@ class Prediction:
 		if show:
 			"MAKE PLOT"
 			#plt.style.use('dark_background')
-			fig, ax = plt.subplots()
+			fig, ax = plt.subplots(figsize=(10,7))
 			plt.plot(self.__dados['DATA HORA'], self.__dados.iloc[:,self.__numCol], '-m', label= self.__dados.iloc[:,self.__numCol].name)
 			ax.set(xlim=(0, len(self.__dados['DATA HORA'])) , xticks=np.arange(0,len(self.__dados['DATA HORA']),8))
+			
 			plt.plot(y0, '--b', label=f'Prediction accuracy: {round(accuracy*100,3)}, %')
 			plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.09), ncol=8)
 			ax.set_xlabel('DATAS', fontsize=12)
 			ax.set_ylabel(self.__dados.iloc[:,numCol].name, fontsize=12)
 			
 			plt.xticks(rotation=45)
-			plt.show()
+			plt.savefig("C:\\Users\\talis\\Desktop\\Projeto POO\\Projetov3\\version04\\Projeto_Covid_POO\\POO\\predicaoImg.png", dpi=200)
 
 	def prediction(self, numUp):
 		predict = 0

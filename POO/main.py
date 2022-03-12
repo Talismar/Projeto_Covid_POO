@@ -7,10 +7,12 @@ from Prediction import *
 
 if __name__=='__main__':
 	"Opcional passar arquivo ou não - senão passar o algoritmo baixa"
+	
 	dataProc = dataProcessing("C:\\Users\\talis\\Desktop\\Projeto POO\\Projetov3\\version04\\Projeto_Covid_POO\\data.csv")
 	
 	"Dados limpo e na ordem correta aqui"
 	dadosLimpo = dataProc.dataProcessing()
+	
 	#print(dadosLimpo)
 	
 	dataAnal = DateAnalysis(dadosLimpo)
@@ -28,9 +30,9 @@ if __name__=='__main__':
 
 	plot = dataVisualization(filtredData)
 	#plot.singlePlot(filtredData['DATA HORA'], filtredData['CONFIRMADOS'])
-	#plot.multiPlot(3)
-	plot.vizual()
+	plot.multiPlot(8)
+	#plot.vizual()
 
 	""" pred = Prediction()
-	pred.polynomialRegression(dadosLimpo,4)
+	pred.polynomialRegression(dadosLimpo,4, True)
 	pred.prediction(1) """
