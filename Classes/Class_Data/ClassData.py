@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 import abc
 
+'''
+Abstract class that receives information from the already processed dataset and stores it in their respective variables
+'''
 class Data(abc.ABC):
 	def __init__(self, dataset):
+		# Receive the dataset and store it in encapsulated (private) variables
 		self.__dataset = dataset
 		self.__data = self.__dataset['DATA HORA']
 		self.__suspeitos = self.__dataset['SUSPEITOS']
@@ -14,6 +18,7 @@ class Data(abc.ABC):
 		self.__notificados = self.__dataset['NOTIFICADOS']
 		self.__isolamento = self.__dataset['ISOLAMENTO']
 	
+	# Getters and setters used to protect and manipulate data.
 	def get_dataset(self):
 		return self.__dataset
 	def get_data(self):
@@ -56,10 +61,12 @@ class Data(abc.ABC):
 	def set_isolamento(self, isolamento):
 		self.__isolamento = isolamento
 	
+	# Abstract method that returns the fatality rate
 	@abc.abstractmethod
 	def fatalityRate(self):
 		"Retorna a taxa de fatalidade de todo o dataset"
 		return str(round((self.__obitos.sum() / self.__confirmados.sum()) * 100,2)) + " %"
-
+	
+	# Represents Data class objects as a string, returning the most recent information for each column of the dataset
 	def __str__(self):
 		return f'Data - {self.__data.iloc[-1]}\nSuspeitos - {self.__suspeitos.iloc[-1]}\nConfirmados - {self.__confirmados.iloc[-1]}\nDescartados - {self.__descartados.iloc[-1]}\nÓbitos - {self.__obitos.iloc[-1]}\nInternados - {self.__internados.iloc[-1]}\nCurados - {self.__curados.iloc[-1]}\nNotificados - {self.__notificados.iloc[-1]}\nIsolamento - {self.__isolamento.iloc[-1]}'
