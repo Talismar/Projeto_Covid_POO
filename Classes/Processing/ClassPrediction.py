@@ -60,7 +60,7 @@ class Prediction:
 			# Rotation of the label on the X axis
 			plt.xticks(rotation=45)
 			# Save the plot in a directory called img
-			plt.savefig("/home/talismar/Desktop/Projeto_Covid_POO-InfoCOVID/Projeto_Covid_POO-main_V9/img/predicaoImg.png", dpi=200)
+			plt.savefig("/home/talismar/Desktop/Covid/Projeto_Covid_POO/img/predicaoImg.png", dpi=200)
 							
 	def prediction(self, numUp):
 		"Method used for prediction based on trained data"

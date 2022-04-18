@@ -25,7 +25,7 @@ class DataVisualization:
 		# Rotation of the label on the X axis
 		plt.xticks(rotation=20)
 		# Save the plot in a directory called img
-		plt.savefig("/home/talismar/Desktop/Projeto_Covid_POO-InfoCOVID/Projeto_Covid_POO-main_V9/img/Plot_Busca_Month.png", dpi=200)
+		plt.savefig("/home/talismar/Desktop/Covid/Projeto_Covid_POO/img/Plot_Busca_Month.png", dpi=200)
 	
 	def multiPlot(self, colunas=None):	
 		"Receives one or more columns for the Y axis, the X axis being the DATA column"
@@ -42,7 +42,7 @@ class DataVisualization:
 		# Legend location at the top center of the plot
 		plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.09), ncol=8)
 		# Save the plot in a directory called img
-		plt.savefig("/home/talismar/Desktop/Projeto_Covid_POO-InfoCOVID/Projeto_Covid_POO-main_V9/img/Plot_Busca_Ano.png", dpi=200)
+		plt.savefig("/home/talismar/Desktop/Covid/Projeto_Covid_POO/img/Plot_Busca_Ano.png", dpi=200)
 	
 	def vizual(self):
 		"Method to generate a line chart with the general information from the 4 main columns"
@@ -59,5 +59,5 @@ class DataVisualization:
 		# Legend location at the top center of the plot
 		plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.09), ncol=8)
 		# Save the plot in a directory called img
-		plt.savefig("/home/talismar/Desktop/Projeto_Covid_POO-InfoCOVID/Projeto_Covid_POO-main_V9/img/plotGeral.png", dpi=200)
+		plt.savefig("/home/talismar/Desktop/Covid/Projeto_Covid_POO/img/plotGeral.png", dpi=200)
 		

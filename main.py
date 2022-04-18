@@ -6,7 +6,7 @@ from os import path
 path_file = path.dirname(__file__)
 
 # Optional pass file or not - otherwise the algorithm downloads the dataset on the site (webScraping)
-dataProc = DataProcessing(path_file + "/data.csv")
+dataProc = DataProcessing()
 
 # If the inserted dataset is empty, return an error
 if dataProc.retorno == "Seus Dados estão vazios":
